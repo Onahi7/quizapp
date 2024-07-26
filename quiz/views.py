@@ -1,9 +1,11 @@
-from django.shortcuts import render,redirect,reverse
-from . import forms,models
+from django.shortcuts import render, redirect
+from django.http import HttpResponse  # Add this import
+from . import forms, models
+from .models import Question
 from django.db.models import Sum
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required,user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from datetime import date, timedelta
 from django.db.models import Q
@@ -13,7 +15,9 @@ from student import models as SMODEL
 from teacher import forms as TFORM
 from student import forms as SFORM
 from django.contrib.auth.models import User
-
+from .forms import UploadFileForm
+import csv
+from io import TextIOWrapper
 
 
 def home_view(request):
@@ -273,9 +277,57 @@ def admin_check_marks_view(request,pk):
 
     results= models.Result.objects.all().filter(exam=course).filter(student=student)
     return render(request,'quiz/admin_check_marks.html',{'results':results})
+
+@login_required(login_url='adminlogin')
+def export_questions_view(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="sample_questions.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Question', 'Option1', 'Option2', 'Option3', 'Option4', 'Answer'])
+
+    questions = models.Question.objects.all()
+    for question in questions:
+        writer.writerow([question.question, question.option1, question.option2, question.option3, question.option4, question.answer])
+
+    return response
+@login_required(login_url='adminlogin')
+def upload_questions_view(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            reader = csv.reader(TextIOWrapper(file, encoding='utf-8'))
+            for row in reader:
+                # Assuming CSV format: question_text, option1, option2, option3, option4, answer
+                Question.objects.create(
+                    question_text=row[0],
+                    option1=row[1],
+                    option2=row[2],
+                    option3=row[3],
+                    option4=row[4],
+                    answer=row[5]
+                )
+            return HttpResponseRedirect('/admin-view-question')  # Redirect to question list
+    else:
+        form = UploadFileForm()
+    return render(request, 'quiz/upload_questions.html', {'form': form})
+
+def upload_questions_view(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES.get('file')
+            if file:
+                # Process the file
+                return redirect('admin-view-question')  # Change this line to redirect to the view questions page
+            else:
+                return render(request, 'quiz/admin_question.html', {'form': form, 'error': 'No file uploaded.'})
+    else:
+        form = UploadFileForm()
+
+    return render(request, 'quiz/admin_question.html', {'form': form})
     
-
-
 
 
 def aboutus_view(request):

@@ -10,6 +10,9 @@ class ContactusForm(forms.Form):
 class TeacherSalaryForm(forms.Form):
     salary=forms.IntegerField()
 
+class UploadFileForm(forms.Form):
+    question_file = forms.FileField()
+
 class CourseForm(forms.ModelForm):
     class Meta:
         model=models.Course
@@ -26,3 +29,5 @@ class QuestionForm(forms.ModelForm):
         widgets = {
             'question': forms.Textarea(attrs={'rows': 3, 'cols': 50})
         }
+class UploadFileForm(forms.Form):
+    file = forms.FileField(label='Select a file', required=True)

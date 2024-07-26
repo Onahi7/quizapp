@@ -2,6 +2,7 @@ from django.urls import path,include
 from django.contrib import admin
 from quiz import views
 from django.contrib.auth.views import LogoutView,LoginView
+from django.urls import path
 urlpatterns = [
    
     path('admin/', admin.site.urls),
@@ -49,5 +50,7 @@ urlpatterns = [
     path('view-question/<int:pk>', views.view_question_view,name='view-question'),
     path('delete-question/<int:pk>', views.delete_question_view,name='delete-question'),
 
-
+    path('export-questions/', views.export_questions_view, name='export-questions'),
+    path('upload-questions/', views.upload_questions_view, name='upload-questions'),
 ]
+
