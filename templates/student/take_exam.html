@@ -1,0 +1,38 @@
+{% extends 'student/studentbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h3 class="text-center mb-0">Exam Rules and Information</h3>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-primary">Exam Details:</h4>
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item">Exam Name: {{ course.course_name }}</li>
+                <li class="list-group-item">Total Questions: {{ total_questions }}</li>
+                <li class="list-group-item">Total Marks: {{ total_marks }}</li>
+            </ul>
+
+            <h4 class="card-title text-primary">Rules:</h4>
+            <ol class="list-group list-group-numbered mb-4">
+                <li class="list-group-item">All questions are multiple choice.</li>
+                <li class="list-group-item"><span class="text-danger fw-bold">Only one choice is correct.</span></li>
+                <li class="list-group-item">Questions May carry different marks.</li>
+                <li class="list-group-item">Answer as quickly as you can .</li>
+                <li class="list-group-item">Refreshing or going back will present a new question; the previous one will be counted as attempted.</li>
+                <li class="list-group-item">Questions are displayed randomly for each user.</li>
+                <li class="list-group-item">Your marks will be shown immediately upon submission.</li>
+            </ol>
+
+            <div class="text-center">
+                <a href="{% url 'start-exam' course.id %}" class="btn btn-primary btn-lg">Start Exam</a>
+            </div>
+        </div>
+        <div class="card-footer text-center text-muted">
+            Best of Luck!
+        </div>
+    </div>
+</div>
+{% endblock content %}

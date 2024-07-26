@@ -1,0 +1,41 @@
+{% extends 'student/studentbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 text-center">Available Courses</h4>
+        </div>
+        <div class="card-body">
+            {% if courses %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Exam Name</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                            <tr>
+                                <td>{{ course.course_name }}</td>
+                                <td class="text-end">
+                                    <a href="{% url 'take-exam' course.id %}" class="btn btn-primary btn-sm">
+                                        Take Exam
+                                        <i class="bi bi-arrow-right-circle ms-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-center text-muted">No courses available at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

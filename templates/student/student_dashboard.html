@@ -1,0 +1,71 @@
+{% extends 'student/studentbase.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Student Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        .dashboard-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .card-yellow {
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+        }
+        .card-pink {
+            background: linear-gradient(45deg, #FF69B4, #FFC0CB);
+        }
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .card-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Student Portal</h1>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card dashboard-card card-yellow text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-book card-icon"></i>
+                    <h5 class="card-title">Total Exams Available</h5>
+                    <p class="card-value">{{ total_course }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card dashboard-card card-pink text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-question-circle card-icon"></i>
+                    <h5 class="card-title">Total Questions</h5>
+                    <p class="card-value">{{ total_question }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock content %}

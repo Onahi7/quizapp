@@ -1,0 +1,86 @@
+{% extends 'student/studentbase.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Your Academic Performance</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+        }
+        .performance-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .performance-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .exam-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        .marks-badge {
+            font-size: 1.2rem;
+            padding: 5px 10px;
+        }
+        .attempt-text {
+            color: #6c757d;
+        }
+        .date-text {
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Your Academic Performance</h1>
+    
+    <div class="row">
+        {% for t in results %}
+        <div class="col-md-6 mb-4">
+            <div class="performance-card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-book exam-icon"></i>
+                        {{ t.exam }}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge badge-primary marks-badge">{{ t.marks }} marks</span>
+                        <span class="attempt-text">Attempt {{ forloop.counter }}</span>
+                    </div>
+                    <p class="date-text mb-0">Exam Date: {{ t.date }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if not results %}
+    <div class="text-center mt-5">
+        <h3>No exam results available yet.</h3>
+        <p>Once you take an exam, your results will appear here.</p>
+    </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock content %}

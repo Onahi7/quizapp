@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizMaster - Challenge Your Mind</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ... (previous styles) ... */
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+    .quiz-category {
+      transition: transform 0.3s;
+    }
+    .quiz-category:hover {
+      transform: translateY(-5px);
+    }
+    .testimonial {
+      background-color: #f1f3f5;
+      border-radius: 15px;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  {% include "quiz/navbar.html" %}
+  
+  <main>
+    <section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+      <!-- ... (previous jumbotron content) ... -->
+    </section>
+
+    <!-- Features Section -->
+    <section class="container my-5">
+      <h2 class="text-center mb-5">Why Choose QuizMaster?</h2>
+      <div class="row">
+        <div class="col-md-4 text-center mb-4">
+          <i class="fas fa-brain feature-icon"></i>
+          <h3>Boost Your Knowledge</h3>
+          <p>Expand your horizons with our diverse range of quizzes.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+          <i class="fas fa-users feature-icon"></i>
+          <h3>Compete with Friends</h3>
+          <p>Challenge your friends and climb the leaderboards.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+          <i class="fas fa-chart-line feature-icon"></i>
+          <h3>Track Your Progress</h3>
+          <p>Watch your scores improve as you master new topics.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Categories Section -->
+    <section class="bg-light py-5">
+      <div class="container">
+        <h2 class="text-center mb-5">Explore Popular Quiz Categories</h2>
+        <div class="row">
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card quiz-category">
+              <div class="card-body text-center">
+                <i class="fas fa-flask fa-3x mb-3 text-primary"></i>
+                <h4>Science</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card quiz-category">
+              <div class="card-body text-center">
+                <i class="fas fa-landmark fa-3x mb-3 text-primary"></i>
+                <h4>History</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card quiz-category">
+              <div class="card-body text-center">
+                <i class="fas fa-film fa-3x mb-3 text-primary"></i>
+                <h4>Pop Culture</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card quiz-category">
+              <div class="card-body text-center">
+                <i class="fas fa-globe fa-3x mb-3 text-primary"></i>
+                <h4>Geography</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="container my-5">
+      <h2 class="text-center mb-5">What Our Users Say</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="testimonial">
+            <p class="mb-3">"QuizMaster has transformed the way I study. It's fun and effective!"</p>
+            <p class="font-weight-bold mb-0">- Sarah J.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="testimonial">
+            <p class="mb-3">"I've learned so much about topics I never thought I'd be interested in."</p>
+            <p class="font-weight-bold mb-0">- Mike T.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="testimonial">
+            <p class="mb-3">"The competitive aspect keeps me coming back. I love challenging my friends!"</p>
+            <p class="font-weight-bold mb-0">- Emma R.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="bg-primary text-white py-5">
+      <div class="container text-center">
+        <h2 class="mb-4">Ready to Test Your Knowledge?</h2>
+        <a href="/student/studentsignup" class="btn btn-lg btn-light">Sign Up Now</a>
+      </div>
+    </section>
+  </main>
+
+  {% include "quiz/footer.html" %}
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
